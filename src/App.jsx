@@ -30,8 +30,8 @@ const experience = [
       "Troubleshoot and resolve hardware, network, and peripheral issues to reduce follow-up tickets",
       "Coordinate hardware relocation set-up, ensuring correct network connectivity and VLAN assignments in collaboration with network teams",
       "Develop quick-reference solutions for common issues to reduce repeat troubleshooting and improve workflow",
-      "Track IT ticket inquiries in Jira, maintaining accurate troubleshooting documentation, and communicating resolution steps and status updates",
-      "Perform routine device setup, software installation, system updates, and support data protection",
+      "Track IT ticket inquiries in Jira, maintaining accurate troubleshooting documentation, and communicating resolution steps and status updates ",
+      "Perform routine device setup, software installation, system updates, and support data protection ",
     ],
   },
 ];
@@ -41,7 +41,7 @@ const projects = [
     title: "Future Fugitive",
     category: "Video Games",
     description:
-      "3D platformer built using the Godot Engine and developed in C#. The game focuses on object-oriented design principles to create modular and maintainable systems for player movement",
+      "3D platformer built using the Godot Engine and developed in C#. The game focuses on object-oriented design principles to create modular and maintainable systems for player movement", // ← short description
     tech: ["Godot", "C#"],
     year: "2024",
     icon: "🎮",
@@ -55,7 +55,7 @@ const projects = [
     tech: ["Python"],
     year: "2024",
     icon: "⚡",
-    link: "https://github.com/nathsoto1/NeuroSim",
+    link: "https://github.com/nathsoto1/NeuroSim", 
   },
   {
     title: "AI Animal and Species Identifier",
@@ -65,7 +65,7 @@ const projects = [
     tech: ["Python", "CSS", "Jupyter Notebook", "JavaScript"],
     year: "2025",
     icon: "🤖",
-    link: "https://github.com/sngu114/CSC-4444-AI-Group-G-Final-Project",
+    link: "https://github.com/sngu114/CSC-4444-AI-Group-G-Final-Project", 
   },
 ];
 
@@ -98,18 +98,6 @@ const PLATES = [
   { kg: 2.5, color: "#f0f9ff", label: "2.5" },
 ];
 
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth < 768 : false
-  );
-  useEffect(() => {
-    const handler = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("resize", handler);
-    return () => window.removeEventListener("resize", handler);
-  }, []);
-  return isMobile;
-}
-
 function useInView(threshold = 0.1) {
   const ref = useRef(null);
   const [inView, setInView] = useState(false);
@@ -118,7 +106,7 @@ function useInView(threshold = 0.1) {
       ([e]) => {
         if (e.isIntersecting) setInView(true);
       },
-      { threshold }
+      { threshold },
     );
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
@@ -130,7 +118,6 @@ function BarbellWidget() {
   const [addedPlates, setAddedPlates] = useState([]);
   const [popMsg, setPopMsg] = useState(null);
   const [ref, inView] = useInView();
-  const isMobile = useIsMobile();
   const totalWeight = 45 + addedPlates.reduce((s, p) => s + p.kg * 2, 0);
   const displayPlates = addedPlates.slice(-6);
 
@@ -153,7 +140,7 @@ function BarbellWidget() {
         style={{
           background: "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)",
           borderRadius: "20px",
-          padding: isMobile ? "1.5rem" : "2.5rem",
+          padding: "2.5rem",
           border: "1px solid #bae6fd",
           position: "relative",
           overflow: "hidden",
@@ -404,11 +391,10 @@ function BarbellWidget() {
   );
 }
 
-export default function App() {
+export default function Portfolio() {
   const [scrollY, setScrollY] = useState(0);
   const [vis, setVis] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     setTimeout(() => setVis(true), 100);
@@ -492,6 +478,7 @@ export default function App() {
         />
       </div>
 
+      {}
       <header
         style={{
           position: "fixed",
@@ -506,9 +493,9 @@ export default function App() {
       >
         <nav
           style={{
-            margin: isMobile ? "0.5rem 0.75rem" : "0.75rem 1.5rem",
+            margin: "0.75rem 1.5rem",
             borderRadius: "16px",
-            padding: isMobile ? "0.75rem 1.25rem" : "0.85rem 1.75rem",
+            padding: "0.85rem 1.75rem",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -519,9 +506,10 @@ export default function App() {
             boxShadow:
               scrollY > 40 ? "0 8px 32px rgba(14,165,233,0.08)" : "none",
             transition: "all 0.3s",
-            position: "relative",
+            overflow: "hidden",
           }}
         >
+          {}
           <span
             style={{
               fontSize: "1.1rem",
@@ -545,106 +533,40 @@ export default function App() {
               }}
             />
           </span>
-
-          {isMobile ? (
-            <>
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
+          <div
+            style={{
+              display: "flex",
+              gap: "0.1rem",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            {navItems.map((l) => (
+              <a
+                key={l}
+                href={"#" + l.toLowerCase()}
                 style={{
-                  background: "none",
-                  border: "none",
-                  fontSize: "1.4rem",
-                  cursor: "pointer",
-                  color: "#0c2340",
-                  padding: "0.25rem",
-                  lineHeight: 1,
+                  fontSize: "0.83rem",
+                  fontWeight: 600,
+                  padding: "0.4rem 0.9rem",
+                  borderRadius: "10px",
+                  color: "#4a7090",
+                  textDecoration: "none",
+                  transition: "all 0.18s",
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.color = "#0ea5e9";
+                  e.target.style.background = "rgba(14,165,233,0.06)";
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.color = "#4a7090";
+                  e.target.style.background = "transparent";
                 }}
               >
-                {menuOpen ? "✕" : "☰"}
-              </button>
-              {menuOpen && (
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "100%",
-                    left: 0,
-                    right: 0,
-                    marginTop: "0.5rem",
-                    background: "rgba(255,255,255,0.97)",
-                    borderRadius: "16px",
-                    padding: "1rem",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "0.25rem",
-                    boxShadow: "0 12px 32px rgba(14,165,233,0.12)",
-                    border: "1px solid rgba(14,165,233,0.1)",
-                  }}
-                >
-                  {navItems.map((l) => (
-                    <a
-                      key={l}
-                      href={"#" + l.toLowerCase()}
-                      onClick={() => setMenuOpen(false)}
-                      style={{
-                        fontSize: "0.9rem",
-                        fontWeight: 600,
-                        padding: "0.65rem 1rem",
-                        borderRadius: "10px",
-                        color: "#4a7090",
-                        textDecoration: "none",
-                        transition: "all 0.18s",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.color = "#0ea5e9";
-                        e.target.style.background = "rgba(14,165,233,0.06)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.color = "#4a7090";
-                        e.target.style.background = "transparent";
-                      }}
-                    >
-                      {l}
-                    </a>
-                  ))}
-                </div>
-              )}
-            </>
-          ) : (
-            <div
-              style={{
-                display: "flex",
-                gap: "0.1rem",
-                alignItems: "center",
-                flexWrap: "wrap",
-              }}
-            >
-              {navItems.map((l) => (
-                <a
-                  key={l}
-                  href={"#" + l.toLowerCase()}
-                  style={{
-                    fontSize: "0.83rem",
-                    fontWeight: 600,
-                    padding: "0.4rem 0.9rem",
-                    borderRadius: "10px",
-                    color: "#4a7090",
-                    textDecoration: "none",
-                    transition: "all 0.18s",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.color = "#0ea5e9";
-                    e.target.style.background = "rgba(14,165,233,0.06)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.color = "#4a7090";
-                    e.target.style.background = "transparent";
-                  }}
-                >
-                  {l}
-                </a>
-              ))}
-            </div>
-          )}
+                {l}
+              </a>
+            ))}
+          </div>
         </nav>
       </header>
 
@@ -654,7 +576,7 @@ export default function App() {
           minHeight: "100vh",
           display: "flex",
           alignItems: "center",
-          padding: isMobile ? "7rem 1.25rem 3rem" : "8rem 3rem 4rem",
+          padding: "8rem 3rem 4rem",
           position: "relative",
           zIndex: 1,
         }}
@@ -663,8 +585,8 @@ export default function App() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: isMobile ? "1fr" : "1fr 420px",
-              gap: isMobile ? "2.5rem" : "5rem",
+              gridTemplateColumns: "1fr 420px",
+              gap: "5rem",
               alignItems: "center",
             }}
           >
@@ -677,7 +599,7 @@ export default function App() {
               >
                 <h1
                   style={{
-                    fontSize: "clamp(2.5rem,6vw,5.25rem)",
+                    fontSize: "clamp(3rem,6vw,5.25rem)",
                     fontWeight: 900,
                     lineHeight: 1.06,
                     letterSpacing: "-0.04em",
@@ -689,7 +611,7 @@ export default function App() {
                 </h1>
                 <h1
                   style={{
-                    fontSize: "clamp(2.5rem,6vw,5.25rem)",
+                    fontSize: "clamp(3rem,6vw,5.25rem)",
                     fontWeight: 900,
                     lineHeight: 1.06,
                     letterSpacing: "-0.04em",
@@ -726,17 +648,14 @@ export default function App() {
                   University, specializing in software engineering with a strong
                   interest in technology, problem-solving, and building
                   efficient solutions. I enjoy working on software projects that
-                  challenge me to think critically and improve my skills I'm
+                  challenge me to think critically and improve my skills I’m
                   always looking for opportunities to grow, take on new
-                  challenges, and apply my skills in impactful ways.
+                  challenges, and apply my skills in impactful ways.{" "}
+                  {/* ↑ replace with your own bio */}
                 </p>
 
                 <div
-                  style={{
-                    display: "flex",
-                    gap: "0.85rem",
-                    flexWrap: "wrap",
-                  }}
+                  style={{ display: "flex", gap: "0.85rem", flexWrap: "wrap" }}
                 >
                   <a
                     href="#projects"
@@ -753,7 +672,6 @@ export default function App() {
                       display: "flex",
                       alignItems: "center",
                       gap: "0.4rem",
-                      ...(isMobile && { width: "100%", justifyContent: "center" }),
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.transform = "translateY(-2px)";
@@ -783,8 +701,6 @@ export default function App() {
                       border: "1.5px solid #bae6fd",
                       boxShadow: "0 4px 16px rgba(14,165,233,0.08)",
                       transition: "all 0.2s",
-                      textAlign: "center",
-                      ...(isMobile && { width: "100%" }),
                     }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.borderColor = "#0ea5e9";
@@ -840,334 +756,262 @@ export default function App() {
               </div>
             </div>
 
-            {isMobile && (
+            <div
+              style={{
+                opacity: vis ? 1 : 0,
+                animation: vis ? "fadeUp 0.8s ease 0.3s both" : "none",
+                position: "relative",
+              }}
+            >
               <div
                 style={{
-                  opacity: vis ? 1 : 0,
-                  animation: vis ? "fadeUp 0.8s ease 0.3s both" : "none",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  gap: "0.75rem",
+                  position: "absolute",
+                  inset: "-2rem",
+                  backgroundImage:
+                    "linear-gradient(rgba(14,165,233,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(14,165,233,0.06) 1px, transparent 1px)",
+                  backgroundSize: "32px 32px",
+                  borderRadius: "24px",
+                  zIndex: 0,
+                  mask: "radial-gradient(circle, black 40%, transparent 75%)",
                 }}
-              >
+              />
+
+              <div style={{ position: "relative", zIndex: 1 }}>
                 <div
                   style={{
-                    width: "120px",
-                    height: "120px",
-                    borderRadius: "50%",
+                    background: "#fff",
+                    borderRadius: "24px",
                     overflow: "hidden",
-                    boxShadow: "0 8px 32px rgba(14,165,233,0.2)",
-                    border: "3px solid #e0f2fe",
+                    boxShadow:
+                      "0 24px 64px rgba(14,165,233,0.15), 0 2px 8px rgba(14,165,233,0.08)",
+                    border: "1px solid rgba(14,165,233,0.1)",
                   }}
                 >
-                  <img
-                    src="/photo.png"
-                    alt="Andy Tran"
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                  />
-                </div>
-                <div style={{ textAlign: "center" }}>
-                  <p style={{ fontSize: "0.95rem", fontWeight: 800, color: "#0c2340" }}>Andy Tran</p>
-                  <p style={{ fontSize: "0.78rem", color: "#7ab8d4", fontWeight: 500 }}>Full-Stack Developer</p>
-                </div>
-                <div style={{ display: "flex", gap: "0.5rem" }}>
-                  <a
-                    href="https://github.com/atran66"
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      padding: "0.4rem 1rem",
-                      borderRadius: "8px",
-                      background: "#f8faff",
-                      border: "1px solid #e0f2fe",
-                      fontSize: "0.75rem",
-                      fontWeight: 700,
-                      color: "#4a7090",
-                      textDecoration: "none",
-                    }}
-                  >
-                    GitHub
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/andy-tran3/"
-                    target="_blank"
-                    rel="noreferrer"
-                    style={{
-                      padding: "0.4rem 1rem",
-                      borderRadius: "8px",
-                      background: "#f8faff",
-                      border: "1px solid #e0f2fe",
-                      fontSize: "0.75rem",
-                      fontWeight: 700,
-                      color: "#4a7090",
-                      textDecoration: "none",
-                    }}
-                  >
-                    LinkedIn
-                  </a>
-                </div>
-              </div>
-            )}
-
-            {!isMobile && (
-              <div
-                style={{
-                  opacity: vis ? 1 : 0,
-                  animation: vis ? "fadeUp 0.8s ease 0.3s both" : "none",
-                  position: "relative",
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: "-2rem",
-                    backgroundImage:
-                      "linear-gradient(rgba(14,165,233,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(14,165,233,0.06) 1px, transparent 1px)",
-                    backgroundSize: "32px 32px",
-                    borderRadius: "24px",
-                    zIndex: 0,
-                    mask: "radial-gradient(circle, black 40%, transparent 75%)",
-                  }}
-                />
-
-                <div style={{ position: "relative", zIndex: 1 }}>
                   <div
                     style={{
-                      background: "#fff",
-                      borderRadius: "24px",
-                      overflow: "hidden",
-                      boxShadow:
-                        "0 24px 64px rgba(14,165,233,0.15), 0 2px 8px rgba(14,165,233,0.08)",
-                      border: "1px solid rgba(14,165,233,0.1)",
+                      height: "4px",
+                      background:
+                        "linear-gradient(90deg, #0ea5e9, #38bdf8, #0284c7)",
+                    }}
+                  />
+
+                  <div
+                    style={{
+                      padding: "2.5rem 2rem",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      minHeight: "300px",
+                      background:
+                        "linear-gradient(160deg, #f0f9ff 0%, #fff 60%)",
                     }}
                   >
                     <div
                       style={{
-                        height: "4px",
-                        background:
-                          "linear-gradient(90deg, #0ea5e9, #38bdf8, #0284c7)",
-                      }}
-                    />
-
-                    <div
-                      style={{
-                        padding: "2.5rem 2rem",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        minHeight: "300px",
-                        background:
-                          "linear-gradient(160deg, #f0f9ff 0%, #fff 60%)",
+                        width: "150px",
+                        height: "150px",
+                        borderRadius: "50%",
+                        overflow: "hidden",
+                        marginBottom: "1rem",
+                        boxShadow: "0 8px 24px rgba(14,165,233,0.15)",
                       }}
                     >
-                      <div
+                      <img
+                        src="/photo.png"
+                        alt="Andy Tran"
                         style={{
-                          width: "150px",
-                          height: "150px",
-                          borderRadius: "50%",
-                          overflow: "hidden",
-                          marginBottom: "1rem",
-                          boxShadow: "0 8px 24px rgba(14,165,233,0.15)",
+                          width: "100%",
+                          height: "100%",
+                          objectFit: "cover",
                         }}
-                      >
-                        <img
-                          src="/photo.png"
-                          alt="Andy Tran"
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                          }}
-                        />
-                      </div>
-
-                      <p
-                        style={{
-                          fontSize: "0.8rem",
-                          fontWeight: 600,
-                          color: "#7ab8d4",
-                          letterSpacing: "0.05em",
-                        }}
-                      >
-                        Andy Tran
-                      </p>
+                      />
                     </div>
 
-                    <div
+                    <p
                       style={{
-                        padding: "1.25rem 1.75rem",
-                        borderTop: "1px solid #f0f9ff",
-                        background: "#fff",
+                        fontSize: "0.8rem",
+                        fontWeight: 600,
+                        color: "#7ab8d4",
+                        letterSpacing: "0.05em",
                       }}
                     >
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "center",
-                        }}
-                      >
-                        <div>
-                          <p
-                            style={{
-                              fontSize: "1rem",
-                              fontWeight: 800,
-                              color: "#0c2340",
-                            }}
-                          >
-                            Andy Tran
-                          </p>
-                          <p
-                            style={{
-                              fontSize: "0.78rem",
-                              color: "#7ab8d4",
-                              fontWeight: 500,
-                              marginTop: "0.1rem",
-                            }}
-                          >
-                            Full-Stack Developer
-                          </p>
-                        </div>
-                        <div style={{ display: "flex", gap: "0.4rem" }}>
-                          <a
-                            href={LINKS.github}
-                            target="_blank"
-                            rel="noreferrer"
-                            style={{
-                              width: "32px",
-                              height: "32px",
-                              borderRadius: "8px",
-                              background: "#f8faff",
-                              border: "1px solid #e0f2fe",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              textDecoration: "none",
-                              transition: "all 0.2s",
-                              color: "#4a7090",
-                              fontSize: "0.75rem",
-                              fontWeight: 700,
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.background = "#e0f2fe";
-                              e.currentTarget.style.color = "#0ea5e9";
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.background = "#f8faff";
-                              e.currentTarget.style.color = "#4a7090";
-                            }}
-                          >
-                            GH
-                          </a>
-                          <a
-                            href={LINKS.linkedin}
-                            target="_blank"
-                            rel="noreferrer"
-                            style={{
-                              width: "32px",
-                              height: "32px",
-                              borderRadius: "8px",
-                              background: "#f8faff",
-                              border: "1px solid #e0f2fe",
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                              textDecoration: "none",
-                              transition: "all 0.2s",
-                              color: "#4a7090",
-                              fontSize: "0.75rem",
-                              fontWeight: 700,
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.background = "#e0f2fe";
-                              e.currentTarget.style.color = "#0ea5e9";
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.background = "#f8faff";
-                              e.currentTarget.style.color = "#4a7090";
-                            }}
-                          >
-                            LI
-                          </a>
-                        </div>
+                      Andy Tran
+                    </p>
+                  </div>
+
+                  <div
+                    style={{
+                      padding: "1.25rem 1.75rem",
+                      borderTop: "1px solid #f0f9ff",
+                      background: "#fff",
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <div>
+                        <p
+                          style={{
+                            fontSize: "1rem",
+                            fontWeight: 800,
+                            color: "#0c2340",
+                          }}
+                        >
+                          Andy Tran
+                        </p>
+                        <p
+                          style={{
+                            fontSize: "0.78rem",
+                            color: "#7ab8d4",
+                            fontWeight: 500,
+                            marginTop: "0.1rem",
+                          }}
+                        >
+                          Full-Stack Developer
+                        </p>
+                      </div>
+                      <div style={{ display: "flex", gap: "0.4rem" }}>
+                        <a
+                          href={LINKS.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          style={{
+                            width: "32px",
+                            height: "32px",
+                            borderRadius: "8px",
+                            background: "#f8faff",
+                            border: "1px solid #e0f2fe",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            textDecoration: "none",
+                            transition: "all 0.2s",
+                            color: "#4a7090",
+                            fontSize: "0.75rem",
+                            fontWeight: 700,
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = "#e0f2fe";
+                            e.currentTarget.style.color = "#0ea5e9";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = "#f8faff";
+                            e.currentTarget.style.color = "#4a7090";
+                          }}
+                        >
+                          GH
+                        </a>
+                        <a
+                          href={LINKS.linkedin}
+                          target="_blank"
+                          rel="noreferrer"
+                          style={{
+                            width: "32px",
+                            height: "32px",
+                            borderRadius: "8px",
+                            background: "#f8faff",
+                            border: "1px solid #e0f2fe",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            textDecoration: "none",
+                            transition: "all 0.2s",
+                            color: "#4a7090",
+                            fontSize: "0.75rem",
+                            fontWeight: 700,
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.background = "#e0f2fe";
+                            e.currentTarget.style.color = "#0ea5e9";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.background = "#f8faff";
+                            e.currentTarget.style.color = "#4a7090";
+                          }}
+                        >
+                          LI
+                        </a>
                       </div>
                     </div>
                   </div>
+                </div>
 
-                  {[
-                    {
-                      label: "React",
-                      sub: "Frontend",
-                      top: "-1.5rem",
-                      left: "-2.5rem",
-                      d: "0s",
-                    },
-                    {
-                      label: "AWS",
-                      sub: "Cloud",
-                      top: "3rem",
-                      right: "-2.5rem",
-                      d: "0.5s",
-                    },
-                    {
-                      label: "Node.js",
-                      sub: "Backend",
-                      bottom: "3.5rem",
-                      left: "-2.5rem",
-                      d: "1s",
-                    },
-                  ].map((b) => (
-                    <div
-                      key={b.label}
+                {[
+                  {
+                    label: "React",
+                    sub: "Frontend",
+                    top: "-1.5rem",
+                    left: "-2.5rem",
+                    d: "0s",
+                  },
+                  {
+                    label: "AWS",
+                    sub: "Cloud",
+                    top: "3rem",
+                    right: "-2.5rem",
+                    d: "0.5s",
+                  },
+                  {
+                    label: "Node.js",
+                    sub: "Backend",
+                    bottom: "3.5rem",
+                    left: "-2.5rem",
+                    d: "1s",
+                  },
+                ].map((b) => (
+                  <div
+                    key={b.label}
+                    style={{
+                      position: "absolute",
+                      top: b.top,
+                      bottom: b.bottom,
+                      left: b.left,
+                      right: b.right,
+                      background: "#fff",
+                      borderRadius: "12px",
+                      padding: "0.6rem 0.9rem",
+                      boxShadow: "0 8px 24px rgba(14,165,233,0.12)",
+                      border: "1px solid #e0f2fe",
+                      animation: "float 3s ease " + b.d + " infinite",
+                      zIndex: 2,
+                      minWidth: "80px",
+                    }}
+                  >
+                    <p
                       style={{
-                        position: "absolute",
-                        top: b.top,
-                        bottom: b.bottom,
-                        left: b.left,
-                        right: b.right,
-                        background: "#fff",
-                        borderRadius: "12px",
-                        padding: "0.6rem 0.9rem",
-                        boxShadow: "0 8px 24px rgba(14,165,233,0.12)",
-                        border: "1px solid #e0f2fe",
-                        animation: "float 3s ease " + b.d + " infinite",
-                        zIndex: 2,
-                        minWidth: "80px",
+                        fontSize: "0.65rem",
+                        color: "#7ab8d4",
+                        fontWeight: 600,
+                        marginBottom: "0.1rem",
                       }}
                     >
-                      <p
-                        style={{
-                          fontSize: "0.65rem",
-                          color: "#7ab8d4",
-                          fontWeight: 600,
-                          marginBottom: "0.1rem",
-                        }}
-                      >
-                        {b.sub}
-                      </p>
-                      <p
-                        style={{
-                          fontSize: "0.9rem",
-                          fontWeight: 800,
-                          color: "#0c2340",
-                        }}
-                      >
-                        {b.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+                      {b.sub}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: "0.9rem",
+                        fontWeight: 800,
+                        color: "#0c2340",
+                      }}
+                    >
+                      {b.label}
+                    </p>
+                  </div>
+                ))}
               </div>
-            )}
+            </div>
           </div>
         </div>
       </section>
 
       <section
         style={{
-          padding: isMobile ? "3rem 1.25rem" : "5rem 3rem",
+          padding: "5rem 3rem",
           background: "#fff",
           position: "relative",
           zIndex: 1,
@@ -1179,42 +1023,24 @@ export default function App() {
           <SkillsSection />
         </div>
       </section>
-
-      <section
-        id="experience"
-        style={{
-          padding: isMobile ? "4rem 1.25rem" : "6rem 3rem",
-          position: "relative",
-          zIndex: 1,
-        }}
-      >
-        <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
-          <SLabel tag="Work History" title="Experience" />
-          <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
-            {experience.map((job, i) => (
-              <ExpCard key={job.role} job={job} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section
         id="projects"
         style={{
-          padding: isMobile ? "4rem 1.25rem" : "6rem 3rem",
+          padding: "6rem 3rem",
           background: "#fff",
           position: "relative",
           zIndex: 1,
         }}
       >
         <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
-          <SLabel tag="My Work" title="Projects & Builds" />
+          <SLabel
+            tag="My Work"
+            title="Projects & Builds"
+          />
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: isMobile
-                ? "1fr"
-                : "repeat(auto-fit,minmax(260px,1fr))",
+              gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
               gap: "1.25rem",
             }}
           >
@@ -1227,11 +1053,7 @@ export default function App() {
 
       <section
         id="education"
-        style={{
-          padding: isMobile ? "4rem 1.25rem" : "6rem 3rem",
-          position: "relative",
-          zIndex: 1,
-        }}
+        style={{ padding: "6rem 3rem", position: "relative", zIndex: 1 }}
       >
         <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
           <SLabel tag="Background" title="Education" />
@@ -1251,9 +1073,7 @@ export default function App() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: isMobile
-                ? "1fr"
-                : "repeat(auto-fit,minmax(230px,1fr))",
+              gridTemplateColumns: "repeat(auto-fit,minmax(230px,1fr))",
               gap: "1rem",
             }}
           >
@@ -1266,7 +1086,7 @@ export default function App() {
 
       <section
         style={{
-          padding: isMobile ? "2rem 1.25rem 4rem" : "3rem 3rem 6rem",
+          padding: "3rem 3rem 6rem",
           background: "#fff",
           position: "relative",
           zIndex: 1,
@@ -1279,11 +1099,7 @@ export default function App() {
 
       <section
         id="contact"
-        style={{
-          padding: isMobile ? "4rem 1.25rem" : "6rem 3rem",
-          position: "relative",
-          zIndex: 1,
-        }}
+        style={{ padding: "6rem 3rem", position: "relative", zIndex: 1 }}
       >
         <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
           <ContactSection />
@@ -1294,12 +1110,10 @@ export default function App() {
         style={{
           background: "#fff",
           borderTop: "1px solid #f0f9ff",
-          padding: isMobile ? "1.5rem 1.25rem" : "1.75rem 3rem",
+          padding: "1.75rem 3rem",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          flexWrap: "wrap",
-          gap: "0.75rem",
           position: "relative",
           zIndex: 1,
         }}
@@ -1505,7 +1319,6 @@ function SLabel({ tag, title, sub }) {
 function ExpCard({ job, index }) {
   const [ref, inView] = useInView();
   const [hov, setHov] = useState(false);
-  const isMobile = useIsMobile();
   return (
     <div
       ref={ref}
@@ -1522,7 +1335,7 @@ function ExpCard({ job, index }) {
           "s, box-shadow 0.25s",
         background: "#fff",
         borderRadius: "16px",
-        padding: isMobile ? "1.25rem" : "1.75rem 2.25rem",
+        padding: "1.75rem 2.25rem",
         border: "1px solid " + (hov ? "#bae6fd" : "#f0f9ff"),
         boxShadow: hov
           ? "0 12px 36px rgba(14,165,233,0.1)"
@@ -1770,7 +1583,6 @@ function ProjCard({ project, index }) {
 
 function EduCard({ item, index }) {
   const [ref, inView] = useInView();
-  const isMobile = useIsMobile();
   return (
     <div
       ref={ref}
@@ -1785,7 +1597,7 @@ function EduCard({ item, index }) {
           "s",
         background: "#fff",
         borderRadius: "14px",
-        padding: isMobile ? "1.25rem" : "1.5rem 1.75rem",
+        padding: "1.5rem 1.75rem",
         border: "1px solid #f0f9ff",
         boxShadow: "0 2px 12px rgba(14,165,233,0.05)",
         display: "flex",
@@ -1808,7 +1620,7 @@ function EduCard({ item, index }) {
       >
         {item.icon}
       </div>
-      <div style={{ flex: 1, minWidth: 0 }}>
+      <div style={{ flex: 1 }}>
         <div
           style={{
             display: "flex",
@@ -1943,7 +1755,6 @@ function CertCard({ cert, index }) {
 
 function ContactSection() {
   const [ref, inView] = useInView();
-  const isMobile = useIsMobile();
   return (
     <div
       ref={ref}
@@ -1958,7 +1769,7 @@ function ContactSection() {
           background:
             "linear-gradient(135deg, #0ea5e9 0%, #0284c7 60%, #0369a1 100%)",
           borderRadius: "28px",
-          padding: isMobile ? "3rem 1.5rem" : "5rem 4rem",
+          padding: "5rem 4rem",
           position: "relative",
           overflow: "hidden",
           boxShadow: "0 32px 80px rgba(14,165,233,0.3)",
@@ -2022,8 +1833,8 @@ function ContactSection() {
               fontWeight: 400,
             }}
           >
-            Whether it's a web app or just want to talk code and powerlifting —
-            my inbox is always open.
+            Whether it's a web app or just want to
+            talk code and powerlifting — mys inbox is always open.
           </p>
           <div
             style={{
@@ -2045,17 +1856,14 @@ function ContactSection() {
                 textDecoration: "none",
                 boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
                 transition: "all 0.2s",
-                ...(isMobile && { width: "100%", textAlign: "center" }),
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow =
-                  "0 14px 32px rgba(0,0,0,0.2)";
+                e.target.style.transform = "translateY(-2px)";
+                e.target.style.boxShadow = "0 14px 32px rgba(0,0,0,0.2)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.transform = "";
-                e.currentTarget.style.boxShadow =
-                  "0 8px 24px rgba(0,0,0,0.15)";
+                e.target.style.transform = "";
+                e.target.style.boxShadow = "0 8px 24px rgba(0,0,0,0.15)";
               }}
             >
               Send a Message →
@@ -2074,13 +1882,12 @@ function ContactSection() {
                 textDecoration: "none",
                 border: "1.5px solid rgba(255,255,255,0.25)",
                 transition: "all 0.2s",
-                ...(isMobile && { width: "100%", textAlign: "center" }),
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.2)";
+                e.target.style.background = "rgba(255,255,255,0.2)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = "rgba(255,255,255,0.12)";
+                e.target.style.background = "rgba(255,255,255,0.12)";
               }}
             >
               LinkedIn Profile
