@@ -404,7 +404,7 @@ function BarbellWidget() {
   );
 }
 
-export default function Portfolio() {
+export default function App() {
   const [scrollY, setScrollY] = useState(0);
   const [vis, setVis] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
