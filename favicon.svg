@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- background -->
+  <rect width="32" height="32" rx="6" fill="#0ea5e9"/>
+
+  <!-- barbell left -->
+  <rect x="2" y="15" width="6" height="2" fill="white"/>
+  <rect x="2" y="13" width="2" height="6" rx="1" fill="white"/>
+
+  <!-- barbell right -->
+  <rect x="24" y="15" width="6" height="2" fill="white"/>
+  <rect x="28" y="13" width="2" height="6" rx="1" fill="white"/>
+
+  <!-- bar (middle connecting) -->
+  <rect x="7" y="15" width="18" height="2" fill="white"/>
+
+  <!-- arms up holding bar -->
+  <rect x="9" y="12" width="2" height="5" fill="white"/>
+  <rect x="21" y="12" width="2" height="5" fill="white"/>
+
+  <!-- body -->
+  <rect x="11" y="17" width="10" height="6" rx="1" fill="white"/>
+
+  <!-- head -->
+  <rect x="13" y="10" width="6" height="6" rx="2" fill="white"/>
+
+  <!-- legs -->
+  <rect x="11" y="23" width="4" height="5" rx="1" fill="white"/>
+  <rect x="17" y="23" width="4" height="5" rx="1" fill="white"/>
+</svg>
